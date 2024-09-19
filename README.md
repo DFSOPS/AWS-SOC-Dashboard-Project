@@ -1,1 +1,1 @@
-# AWSSOCDashboardProject
+# AWS SOC Dashboard Project
