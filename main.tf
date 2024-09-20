@@ -1,20 +1,31 @@
-provider "aws" {
-  region = "eu-west-2" # London region
+resource "aws_iam_role" "ec2_logging_role" {
+  name               = "EC2LoggingRole"
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17",
+    Statement = [
+      {
+        Effect = "Allow",
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        },
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
 }
 
-# S3 Bucket for WAF Logs
-resource "aws_s3_bucket" "aws_waf_logs_lond" { # Updated resource name to match bucket name
-  bucket = "aws-waf-logs-lond" # New bucket name
-}
-# Terraform Backend Configuration
-terraform {
-  backend "s3" {
-    bucket = "aws-waf-logs-lond"  # Use the new bucket name for backend
-    key    = "terraform/state"      # Path to store the state file
-    region = "eu-west-2"            # London region
-  }
+resource "aws_iam_role_policy_attachment" "cloudwatch_agent" {
+  role       = aws_iam_role.ec2_logging_role.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchAgentServerPolicy"
 }
 
-output "waf_logs_bucket" {
-  value = aws_s3_bucket.aws_waf_logs_lond.id # Updated to match resource name
+resource "aws_iam_role_policy_attachment" "cloudwatch_logs_access" {
+  role       = aws_iam_role.ec2_logging_role.name
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"
 }
+
+resource "aws_iam_role_policy_attachment" "waf_read_only_access" {
+  role       = aws_iam_role.ec2_logging_role.name
+  policy_arn = "arn:aws:iam::aws:policy/AWSWAFReadOnlyAccess"
+}
+
