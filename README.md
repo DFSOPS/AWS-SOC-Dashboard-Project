@@ -1,4 +1,4 @@
-# SOC Dashboard Project
+# SOC Dashboard Project -Please refer to images
 
 ## Overview
 This project showcases the development of a **Security Operations Center (SOC) dashboard** using **AWS Managed Grafana**, providing real-time monitoring and security insights. The dashboard integrates key AWS services like **AWS WAF** and **VPC Flow Logs** to visualize traffic patterns, detect potential threats, and monitor network performance.
