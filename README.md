@@ -34,7 +34,7 @@ The WAF dashboard visualizes:
 - **Blocked** and **Allowed requests** over time.
 - A breakdown of request patterns, allowing identification of potential threats.
 
-![WAF Traffic Monitoring]()
+![WAF Traffic Monitoring](Images)
 
 ### 2. VPC Flow Logs Dashboard
 The VPC Flow Logs dashboard provides:
@@ -42,7 +42,7 @@ The VPC Flow Logs dashboard provides:
 - Top **sources and destinations** of network traffic.
 - **Protocol** and **port analysis** to monitor open and potentially vulnerable services.
 
-![VPC Flow Logs]()
+![VPC Flow Logs](Images)
 
 ### 3. Real-Time Alerts and Metrics
 - **Latency and response times**: Monitored key performance metrics to ensure timely responses.
